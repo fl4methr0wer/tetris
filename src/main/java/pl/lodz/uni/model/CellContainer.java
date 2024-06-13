@@ -21,11 +21,4 @@ public class CellContainer {
     public Collection<Cell> getCells() {
         return cells;
     }
-
-    protected boolean containsCellByRowAndCol(int row, int col) {
-        return cells.stream()
-                .filter(cell -> cell.row() == row && cell.col() == col)
-                .findAny()
-                .isPresent();
-    }
 }
