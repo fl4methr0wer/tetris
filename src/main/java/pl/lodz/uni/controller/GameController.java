@@ -15,7 +15,7 @@ public class GameController {
 
     private final Timer timer;
     private final GameStateListener userInterface;
-    private Tetromino tetromino = new Tetromino();
+    private Tetromino tetromino = TetrominoFactory.createRandomTetromino();
     private final Pile pile;
     private Cell topLeftTetrominoCell;
 
@@ -39,7 +39,9 @@ public class GameController {
     }
 
     public void moveTetrominoDown() {
+        System.out.println("BEFORE MOVE DOWN: " + tetromino.getCells());
         Tetromino movedDown = tetromino.movedDown();
+        System.out.println("AFTER MOVE DOWN: " + movedDown);
         checkNewTetrominoPositionAndHandleExceptions(movedDown);
         notifyCellsChanged();
     }
@@ -59,7 +61,7 @@ public class GameController {
             try {
                 pile.validateTetrominoPositionOrThrow(tetromino, topLeftTetrominoCell);
             } catch (CellTakenException ee) {
-                System.out.println("GAM OVER" + e.getMessage());
+                System.out.println("GAME OVER" + e.getMessage());
             }
         }
     }
