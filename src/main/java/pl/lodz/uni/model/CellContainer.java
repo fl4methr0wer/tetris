@@ -14,7 +14,11 @@ public class CellContainer {
         this.cells = cells;
     }
 
-    protected Collection<Cell> getCells() {
+    public void addAll(Collection<Cell> cells) {
+        this.cells.addAll(cells);
+    }
+
+    public Collection<Cell> getCells() {
         return cells;
     }
 

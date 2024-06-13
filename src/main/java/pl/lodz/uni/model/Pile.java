@@ -15,7 +15,15 @@ public class Pile extends CellContainer {
         this.COL_MAX_INDEX = columns - 1;
     }
 
-    public void canAccept(Tetromino tetromino, Cell topLeftCellOffset)
+    public int getRowMaxIndex() {
+        return ROW_MAX_INDEX;
+    }
+
+    public int getColMaxIndex() {
+        return COL_MAX_INDEX;
+    }
+
+    public void validateTetrominoPositionOrThrow(Tetromino tetromino, Cell topLeftCellOffset)
             throws IndexOutOfBoundsException, CellTakenException {
         Collection<Cell> tetrominoCells = tetromino.getCells();
 

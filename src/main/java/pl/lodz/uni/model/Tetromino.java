@@ -8,16 +8,36 @@ import java.util.stream.Collectors;
 public class Tetromino extends CellContainer {
 
     public Tetromino() {
-        this.cells = new ArrayList<>();
+        super(new ArrayList<>());
     }
 
     public Tetromino(Collection<Cell> cells) {
         super(cells);
     }
 
+    public Tetromino movedRigh() {
+        Collection<Cell> movedRightCells = this.getCells().stream()
+                .map(c -> new Cell(c.row(), c.col()+1))
+                .collect(Collectors.toList());
+        return new Tetromino(movedRightCells);
+    }
+
+    public Tetromino movedLeft() {
+        Collection<Cell> movedRightCells = this.getCells().stream()
+                .map(c -> new Cell(c.row(), c.col() - 1))
+                .collect(Collectors.toList());
+        return new Tetromino(movedRightCells);
+    }
+
+    public Tetromino movedDown() {
+        Collection<Cell> movedRightCells = this.getCells().stream()
+                .map(c -> new Cell(c.row() + 1, c.col()))
+                .collect(Collectors.toList());
+        return new Tetromino(movedRightCells);
+    }
+
     public Tetromino rotatedLeft() {
-        Collection<Cell> cells = getCells();
-        return new Tetromino(flippedHorizontally(transposed(cells)));
+        return new Tetromino(flippedHorizontally(transposed(this.getCells())));
     }
 
     private Collection<Cell> transposed(Collection<Cell> cells) {
