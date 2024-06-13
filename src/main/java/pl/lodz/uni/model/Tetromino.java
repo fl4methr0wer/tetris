@@ -15,29 +15,8 @@ public class Tetromino extends CellContainer {
         super(cells);
     }
 
-    public Tetromino movedRigh() {
-        Collection<Cell> movedRightCells = this.getCells().stream()
-                .map(c -> new Cell(c.row(), c.col()+1))
-                .collect(Collectors.toList());
-        return new Tetromino(movedRightCells);
-    }
-
-    public Tetromino movedLeft() {
-        Collection<Cell> movedRightCells = this.getCells().stream()
-                .map(c -> new Cell(c.row(), c.col() - 1))
-                .collect(Collectors.toList());
-        return new Tetromino(movedRightCells);
-    }
-
-    public Tetromino movedDown() {
-        Collection<Cell> movedRightCells = this.getCells().stream()
-                .map(c -> new Cell(c.row() + 1, c.col()))
-                .collect(Collectors.toList());
-        return new Tetromino(movedRightCells);
-    }
-
     public Tetromino rotatedLeft() {
-        return new Tetromino(flippedHorizontally(transposed(this.getCells())));
+        return new Tetromino(transposed(flippedHorizontally(this.getCells())));
     }
 
     private Collection<Cell> transposed(Collection<Cell> cells) {

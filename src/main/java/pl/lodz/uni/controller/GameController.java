@@ -29,7 +29,7 @@ public class GameController {
 
     private void onTimerTick(ActionEvent actionEvent) {
         System.out.println("TIMER TICK");
-        moveTetrominoDown();
+        //moveTetrominoDown();
     }
 
     private void notifyCellsChanged() {
@@ -42,27 +42,17 @@ public class GameController {
     }
 
     public void moveTetrominoDown() {
-        //System.out.println("GC BEFORE MOVE DOWN: " + tetromino.getCells());
-        Tetromino movedDown = tetromino.movedDown();
-        //System.out.println("GC AFTER MOVE DOWN: " + movedDown);
-        this.tetromino = movedDown;
-        //checkNewTetrominoPositionAndHandleExceptions(movedDown);
+        topLeftTetrominoCell = new Cell(topLeftTetrominoCell.row() + 1, topLeftTetrominoCell.col());
         notifyCellsChanged();
     }
 
     public void moveTetrominoRight() {
-        System.out.println("GC BEFORE MOVE RIGHT: " + tetromino.getCells());
-        Tetromino movedRight = tetromino.movedRigh();
-        System.out.println("GC AFTER MOVE RIGHT: " + movedRight);
-        this.tetromino = movedRight;
+        topLeftTetrominoCell = topLeftTetrominoCell.movedRight();
         notifyCellsChanged();
     }
 
     public void moveTetrominoLeft() {
-        System.out.println("GC BEFORE MOVE LEFT: " + tetromino.getCells());
-        Tetromino movedLeft = tetromino.movedLeft();
-        System.out.println("GC AFTER MOVE LEFT: " + movedLeft);
-        this.tetromino = movedLeft;
+        topLeftTetrominoCell = topLeftTetrominoCell.movedLeft();
         notifyCellsChanged();
     }
 
