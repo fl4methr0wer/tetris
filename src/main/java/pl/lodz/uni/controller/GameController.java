@@ -9,7 +9,9 @@ import pl.lodz.uni.model.exception.CellTakenException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameController {
 
@@ -28,37 +30,77 @@ public class GameController {
     }
 
     private void onTimerTick(ActionEvent actionEvent) {
-        System.out.println("TIMER TICK");
-        //moveTetrominoDown();
+        //System.out.println("TIMER TICK");
+        moveTetrominoDown();
+    }
+
+    private boolean isValidNewTetrominoPosition(Tetromino tetromino, Cell topLeft) {
+        try {
+            pile.validateTetrominoPositionOrThrow(tetromino, topLeft);
+        } catch (IndexOutOfBoundsException outOfBoundsException) {
+            System.out.println("OUT OF BOUNDS" + outOfBoundsException);
+            return false;
+        } catch (CellTakenException cellTakenException) {
+            System.out.println("CELL TAKEN: " + cellTakenException);
+            return false;
+        }
+        return true;
+    }
+
+    private Collection<Cell> cellsWithOffset(Collection<Cell> cells, Cell offset) {
+        return cells.stream()
+                .map(c -> new Cell(c.row() + offset.row(), c.col() + offset.col()))
+                .collect(Collectors.toList());
     }
 
     private void notifyCellsChanged() {
-        List<Cell> absoluteTetrominoCells = tetromino.getCells().stream()
-                .map(c -> new Cell(c.row() + topLeftTetrominoCell.row(), c.col() + topLeftTetrominoCell.col()))
-                .toList();
-        List<Cell> allCells = new ArrayList<>(absoluteTetrominoCells);
+        List<Cell> allCells = new ArrayList<>(cellsWithOffset(tetromino.getCells(), topLeftTetrominoCell));
         allCells.addAll(pile.getCells());
         userInterface.onCellsMoved(allCells);
     }
 
+    private void onBottomReached() {
+        System.out.println("BOTTOM REACHED");
+        pile.addAll(cellsWithOffset(tetromino.getCells(), topLeftTetrominoCell));
+        pile.purgeFullRows();
+
+        tetromino = TetrominoFactory.createRandomTetromino();
+        topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
+        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell)) {
+            System.out.println("GAME OVER");
+            userInterface.onGameOver();
+            timer.stop();
+        }
+        notifyCellsChanged();
+    }
+
     public void moveTetrominoDown() {
-        topLeftTetrominoCell = new Cell(topLeftTetrominoCell.row() + 1, topLeftTetrominoCell.col());
+        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell.movedDown())) {
+            onBottomReached();
+        }
+
+        topLeftTetrominoCell = topLeftTetrominoCell.movedDown();
         notifyCellsChanged();
     }
 
     public void moveTetrominoRight() {
+        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell.movedRight()))
+            return;
         topLeftTetrominoCell = topLeftTetrominoCell.movedRight();
         notifyCellsChanged();
     }
 
     public void moveTetrominoLeft() {
+        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell.movedLeft()))
+            return;
         topLeftTetrominoCell = topLeftTetrominoCell.movedLeft();
         notifyCellsChanged();
     }
 
     public void rotateTetromino() {
-        System.out.println("GC BEFORE ROTATE: " + tetromino.getCells());
         Tetromino rotated = tetromino.rotatedLeft();
+        if (!isValidNewTetrominoPosition(rotated, topLeftTetrominoCell))
+            return;
         System.out.println("GC AFTER ROTATE: " + rotated);
         this.tetromino = rotated;
         notifyCellsChanged();

@@ -5,7 +5,7 @@ public record Cell(
         int col
 ) {
     public Cell movedDown() {
-        return new Cell(row - 1, col);
+        return new Cell(row + 1, col);
     }
     public Cell movedRight() {
         return new Cell(row, col + 1);

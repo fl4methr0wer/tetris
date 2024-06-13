@@ -19,7 +19,6 @@ public class KeyboardInputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        System.out.println("KEY PRESSED: " + keyCode);
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
                 gameController.moveTetrominoLeft();

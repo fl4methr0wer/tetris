@@ -14,8 +14,6 @@ public class GridPanel extends JPanel implements GameStateListener {
     private final int CELL_SIZE;
     private Collection<Cell> cells;
 
-    private String message = ""; // New message variable
-
     public GridPanel(int rows, int columns, int cellSize) {
         this.ROWS = rows;
         this.COLUMNS = columns;
@@ -33,7 +31,7 @@ public class GridPanel extends JPanel implements GameStateListener {
 
     @Override
     public void onGameOver() {
-        System.out.println("Game Over"); // Debugging statement
+        System.out.println("UI Game Over"); // Debugging statement
         // Handle game over logic here, if needed
     }
 
@@ -42,10 +40,6 @@ public class GridPanel extends JPanel implements GameStateListener {
         super.paintComponent(g);
         paintBackground(g);
         paintCells(g);
-
-        // Draw message on the panel
-        g.setColor(Color.BLACK);
-        g.drawString(message, 20, 20); // Adjust coordinates as needed
     }
 
     private void paintBackground(Graphics g) {
@@ -83,11 +77,5 @@ public class GridPanel extends JPanel implements GameStateListener {
         // Inner rectangle
         g.fillRect(x + outerOffset + innerOffset, y + outerOffset + innerOffset,
                 CELL_SIZE - outerOffset - 2 * innerOffset, CELL_SIZE - outerOffset - 2 * innerOffset);
-    }
-
-    // Method to set and update the message
-    public void setMessage(String message) {
-        this.message = message;
-        repaint(); // Trigger repaint to update the panel with the new message
     }
 }
