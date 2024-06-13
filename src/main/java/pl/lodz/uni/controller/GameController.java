@@ -39,10 +39,11 @@ public class GameController {
     }
 
     public void moveTetrominoDown() {
-        System.out.println("BEFORE MOVE DOWN: " + tetromino.getCells());
+        System.out.println("GC BEFORE MOVE DOWN: " + tetromino.getCells());
         Tetromino movedDown = tetromino.movedDown();
-        System.out.println("AFTER MOVE DOWN: " + movedDown);
-        checkNewTetrominoPositionAndHandleExceptions(movedDown);
+        System.out.println("GC AFTER MOVE DOWN: " + movedDown);
+        this.tetromino = tetromino.movedDown();
+        //checkNewTetrominoPositionAndHandleExceptions(movedDown);
         notifyCellsChanged();
     }
 
