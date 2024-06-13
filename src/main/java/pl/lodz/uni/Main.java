@@ -1,6 +1,7 @@
 package pl.lodz.uni;
 
 import pl.lodz.uni.controller.GameController;
+import pl.lodz.uni.controller.KeyboardInputHandler;
 import pl.lodz.uni.model.Pile;
 import pl.lodz.uni.view.GameFrame;
 import pl.lodz.uni.view.GridPanel;
@@ -19,6 +20,10 @@ public class Main {
             gameFrame.setGridPanel(gridPanel); // Pass the gridPanel instance here
 
             GameController gameController = new GameController(gridPanel, new Pile(ROWS, COLS));
+
+            KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameController);
+            gridPanel.setFocusable(true);
+            gridPanel.addKeyListener(inputHandler);
         });
     }
 }
