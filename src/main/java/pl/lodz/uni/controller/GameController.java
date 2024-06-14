@@ -30,7 +30,6 @@ public class GameController {
     }
 
     private void onTimerTick(ActionEvent actionEvent) {
-        //System.out.println("TIMER TICK");
         moveTetrominoDown();
     }
 
@@ -67,7 +66,8 @@ public class GameController {
         tetromino = TetrominoFactory.createRandomTetromino();
         topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
         if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell)) {
-            System.out.println("GAME OVER");
+            System.out.println("CONTROLLER GAME OVER");
+
             userInterface.onGameOver();
             timer.stop();
         }
@@ -75,25 +75,28 @@ public class GameController {
     }
 
     public void moveTetrominoDown() {
-        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell.movedDown())) {
+        Cell movedDown = topLeftTetrominoCell.movedDown();
+        if (!isValidNewTetrominoPosition(tetromino, movedDown)) {
             onBottomReached();
+            return;
         }
-
-        topLeftTetrominoCell = topLeftTetrominoCell.movedDown();
+        topLeftTetrominoCell = movedDown;
         notifyCellsChanged();
     }
 
     public void moveTetrominoRight() {
-        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell.movedRight()))
+        Cell movedRight = topLeftTetrominoCell.movedRight();
+        if (!isValidNewTetrominoPosition(tetromino, movedRight))
             return;
-        topLeftTetrominoCell = topLeftTetrominoCell.movedRight();
+        topLeftTetrominoCell = movedRight;
         notifyCellsChanged();
     }
 
     public void moveTetrominoLeft() {
-        if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell.movedLeft()))
+        Cell movedLeft = topLeftTetrominoCell.movedLeft();
+        if (!isValidNewTetrominoPosition(tetromino, movedLeft))
             return;
-        topLeftTetrominoCell = topLeftTetrominoCell.movedLeft();
+        topLeftTetrominoCell = movedLeft;
         notifyCellsChanged();
     }
 
@@ -101,7 +104,6 @@ public class GameController {
         Tetromino rotated = tetromino.rotatedLeft();
         if (!isValidNewTetrominoPosition(rotated, topLeftTetrominoCell))
             return;
-        System.out.println("GC AFTER ROTATE: " + rotated);
         this.tetromino = rotated;
         notifyCellsChanged();
     }

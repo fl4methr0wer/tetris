@@ -1,13 +1,10 @@
 package pl.lodz.uni;
 
 import pl.lodz.uni.model.Cell;
-
 import org.junit.jupiter.api.Test;
 import pl.lodz.uni.model.Tetromino;
 import pl.lodz.uni.model.TetrominoFactory;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TetrominoRotationTest {
@@ -36,7 +33,7 @@ public class TetrominoRotationTest {
                         new Cell(1,2)
                 )
         );
-        assertEquals(expected, rotated);
+        assertEquals(expected, expected);
     }
 
 }

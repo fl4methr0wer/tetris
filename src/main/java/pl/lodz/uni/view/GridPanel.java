@@ -18,9 +18,8 @@ public class GridPanel extends JPanel implements GameStateListener {
         this.ROWS = rows;
         this.COLUMNS = columns;
         this.CELL_SIZE = cellSize;
-        this.cells = new ArrayList<>(); // Initialize cells to avoid null checks
+        this.cells = new ArrayList<>();
         setPreferredSize(new Dimension(columns * cellSize, rows * cellSize));
-        setBackground(new Color(167, 171, 138)); // Background color to distinguish the panel
     }
 
     @Override
@@ -32,6 +31,7 @@ public class GridPanel extends JPanel implements GameStateListener {
     @Override
     public void onGameOver() {
         System.out.println("UI Game Over"); // Debugging statement
+        repaint();
         // Handle game over logic here, if needed
     }
 
@@ -54,7 +54,6 @@ public class GridPanel extends JPanel implements GameStateListener {
         Color darkGreen = new Color(136, 145, 118);
         Color black = new Color(10, 10, 25);
 
-        graphics.setColor(darkGreen);
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
                 int x = col * CELL_SIZE;
