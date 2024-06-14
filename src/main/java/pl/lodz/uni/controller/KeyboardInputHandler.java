@@ -32,6 +32,13 @@ public class KeyboardInputHandler implements KeyListener {
             case KeyEvent.VK_DOWN:
                 gameController.moveTetrominoDown();
                 break;
+            case KeyEvent.VK_SPACE:
+                if (gameController.gameState.equals(GameState.STOPPED))
+                    gameController.start();
+                else
+                    gameController.stop();
+            case KeyEvent.VK_R:
+                gameController.restart();
             default:
                 // Handle other keys if needed
         }

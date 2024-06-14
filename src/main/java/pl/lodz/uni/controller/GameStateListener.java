@@ -5,5 +5,4 @@ import java.util.Collection;
 
 public interface GameStateListener {
     void onCellsMoved(Collection<Cell> cells);
-    void onGameOver();
 }

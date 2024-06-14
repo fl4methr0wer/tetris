@@ -32,8 +32,9 @@ public class GridPanel extends JPanel implements GameStateListener, GameOverList
     @Override
     public void onGameOver() {
         System.out.println("UI Game Over"); // Debugging statement
+        this.cells.clear();
         repaint();
-        // Handle game over logic here, if needed
+        System.out.println("REPAINTED");
     }
 
     @Override

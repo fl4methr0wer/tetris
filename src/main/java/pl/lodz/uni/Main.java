@@ -25,12 +25,12 @@ public class Main {
             GameController gameController = new GameController(gridPanel, new Pile(ROWS, COLS));
 
             gameController.registerGameOverListener(new GameOverPopup());
+            //gameController.registerGameOverListener(gridPanel);
 
             KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameController);
             gridPanel.setFocusable(true);
             gridPanel.addKeyListener(inputHandler);
 
-            //gameFrame.setScorePanel(new ScorePanel());
         });
     }
 }

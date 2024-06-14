@@ -18,6 +18,7 @@ Projekt przedstawia implementację gry Tetris przy użyciu języka Java oraz bib
         - Strzałka w prawo: przesunięcie klocka w prawo.
         - Strzałka w górę: obrót klocka.
         - Strzałka w dół: przyspieszenie opadania klocka.
+        - R: restart gry
 
 3. **Zapełnianie linii:**
     - Jeżeli pozioma linia na planszy zostanie całkowicie zapełniona klockami, powinna zostać usunięta, a gracz powinien otrzymać punkty.
@@ -43,7 +44,7 @@ Projekt przedstawia implementację gry Tetris przy użyciu języka Java oraz bib
 ## Instalacja i uruchomienie
 
 1. Skompiluj projekt przy użyciu preferowanego narzędzia do budowania projektów Java (np. Maven, Gradle).
-2. Uruchom aplikację przy użyciu polecenia `java -jar Tetris.jar`.
+2. Uruchom aplikację przy użyciu polecenia `java -jar <Project_name>.jar`.
 
 ## Wersja JRE
 

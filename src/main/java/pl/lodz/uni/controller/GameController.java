@@ -15,19 +15,36 @@ import java.util.stream.Collectors;
 
 public class GameController {
 
-    private final Timer timer;
+    private Timer timer = new Timer(500, this::onTimerTick);;
     private final GameStateListener userInterface;
     private GameOverListener gameOverListener;
     private Tetromino tetromino = TetrominoFactory.createRandomTetromino();
     private final Pile pile;
     private Cell topLeftTetrominoCell;
+    public GameState gameState = GameState.STOPPED;
 
     public GameController(GameStateListener userInterface, Pile pile) {
         this.userInterface = userInterface;
         this.pile = pile;
-        this.timer = new Timer(500, this::onTimerTick);
-        this.timer.start();
         this.topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
+        notifyCellsChanged();
+    }
+
+    public void start() {
+        this.timer.start();
+        gameState = GameState.RUNNING;
+    }
+
+    public void stop() {
+        timer.stop();
+        gameState = GameState.STOPPED;
+    }
+
+    public void restart() {
+        this.pile.getCells().clear();
+        this.tetromino = TetrominoFactory.createRandomTetromino();
+        topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
+        gameState = GameState.RUNNING;
     }
 
     public void registerGameOverListener(GameOverListener gameOverListener) {
@@ -74,7 +91,8 @@ public class GameController {
             System.out.println("CONTROLLER GAME OVER");
 
             gameOverListener.onGameOver();
-            timer.stop();
+            this.pile.getCells().clear();
+            this.stop();
         }
         notifyCellsChanged();
     }
