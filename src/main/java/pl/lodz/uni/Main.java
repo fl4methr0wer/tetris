@@ -4,6 +4,7 @@ import pl.lodz.uni.controller.GameController;
 import pl.lodz.uni.controller.KeyboardInputHandler;
 import pl.lodz.uni.model.Pile;
 import pl.lodz.uni.view.GameFrame;
+import pl.lodz.uni.view.GameOverPopup;
 import pl.lodz.uni.view.GridPanel;
 import pl.lodz.uni.view.ScorePanel;
 
@@ -22,6 +23,8 @@ public class Main {
             gameFrame.setGridPanel(gridPanel); // Pass the gridPanel instance here
 
             GameController gameController = new GameController(gridPanel, new Pile(ROWS, COLS));
+
+            gameController.registerGameOverListener(new GameOverPopup());
 
             KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameController);
             gridPanel.setFocusable(true);

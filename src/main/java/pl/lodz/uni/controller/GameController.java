@@ -17,6 +17,7 @@ public class GameController {
 
     private final Timer timer;
     private final GameStateListener userInterface;
+    private GameOverListener gameOverListener;
     private Tetromino tetromino = TetrominoFactory.createRandomTetromino();
     private final Pile pile;
     private Cell topLeftTetrominoCell;
@@ -27,6 +28,10 @@ public class GameController {
         this.timer = new Timer(500, this::onTimerTick);
         this.timer.start();
         this.topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
+    }
+
+    public void registerGameOverListener(GameOverListener gameOverListener) {
+        this.gameOverListener = gameOverListener;
     }
 
     private void onTimerTick(ActionEvent actionEvent) {
@@ -68,7 +73,7 @@ public class GameController {
         if (!isValidNewTetrominoPosition(tetromino, topLeftTetrominoCell)) {
             System.out.println("CONTROLLER GAME OVER");
 
-            userInterface.onGameOver();
+            gameOverListener.onGameOver();
             timer.stop();
         }
         notifyCellsChanged();

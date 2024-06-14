@@ -1,5 +1,6 @@
 package pl.lodz.uni.view;
 
+import pl.lodz.uni.controller.GameOverListener;
 import pl.lodz.uni.controller.GameStateListener;
 import pl.lodz.uni.model.Cell;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class GridPanel extends JPanel implements GameStateListener {
+public class GridPanel extends JPanel implements GameStateListener, GameOverListener {
     private final int ROWS;
     private final int COLUMNS;
     private final int CELL_SIZE;
