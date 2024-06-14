@@ -5,10 +5,10 @@ import java.awt.event.KeyListener;
 
 public class KeyboardInputHandler implements KeyListener {
 
-    private final GameController gameController;
+    private final GameEngine gameEngine;
 
-    public KeyboardInputHandler(GameController gameController) {
-        this.gameController = gameController;
+    public KeyboardInputHandler(GameEngine gameEngine) {
+        this.gameEngine = gameEngine;
     }
 
     @Override
@@ -21,24 +21,24 @@ public class KeyboardInputHandler implements KeyListener {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
-                gameController.moveTetrominoLeft();
+                gameEngine.moveTetrominoLeft();
                 break;
             case KeyEvent.VK_RIGHT:
-                gameController.moveTetrominoRight();
+                gameEngine.moveTetrominoRight();
                 break;
             case KeyEvent.VK_UP:
-                gameController.rotateTetromino();
+                gameEngine.rotateTetromino();
                 break;
             case KeyEvent.VK_DOWN:
-                gameController.moveTetrominoDown();
+                gameEngine.moveTetrominoDown();
                 break;
             case KeyEvent.VK_SPACE:
-                if (gameController.gameState.equals(GameState.STOPPED))
-                    gameController.start();
+                if (gameEngine.gameState.equals(GameState.STOPPED))
+                    gameEngine.start();
                 else
-                    gameController.stop();
+                    gameEngine.stop();
             case KeyEvent.VK_R:
-                gameController.restart();
+                gameEngine.restart();
             default:
                 // Handle other keys if needed
         }

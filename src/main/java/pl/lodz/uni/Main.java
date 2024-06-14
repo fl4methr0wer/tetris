@@ -1,12 +1,11 @@
 package pl.lodz.uni;
 
-import pl.lodz.uni.controller.GameController;
+import pl.lodz.uni.controller.GameEngine;
 import pl.lodz.uni.controller.KeyboardInputHandler;
 import pl.lodz.uni.model.Pile;
 import pl.lodz.uni.view.GameFrame;
 import pl.lodz.uni.view.GameOverPopup;
 import pl.lodz.uni.view.GridPanel;
-import pl.lodz.uni.view.ScorePanel;
 
 import javax.swing.*;
 
@@ -22,12 +21,12 @@ public class Main {
             GridPanel gridPanel = new GridPanel(ROWS, COLS, CELL_SIZE);
             gameFrame.setGridPanel(gridPanel); // Pass the gridPanel instance here
 
-            GameController gameController = new GameController(gridPanel, new Pile(ROWS, COLS));
+            GameEngine gameEngine = new GameEngine(gridPanel, new Pile(ROWS, COLS));
 
-            gameController.registerGameOverListener(new GameOverPopup());
-            //gameController.registerGameOverListener(gridPanel);
+            gameEngine.registerGameOverListener(new GameOverPopup());
+            //gameEngine.registerGameOverListener(gridPanel);
 
-            KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameController);
+            KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameEngine);
             gridPanel.setFocusable(true);
             gridPanel.addKeyListener(inputHandler);
 

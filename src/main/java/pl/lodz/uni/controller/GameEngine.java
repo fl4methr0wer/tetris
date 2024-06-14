@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GameController {
+public class GameEngine {
 
     private Timer timer = new Timer(500, this::onTimerTick);;
     private final GameStateListener userInterface;
@@ -23,7 +23,7 @@ public class GameController {
     private Cell topLeftTetrominoCell;
     public GameState gameState = GameState.STOPPED;
 
-    public GameController(GameStateListener userInterface, Pile pile) {
+    public GameEngine(GameStateListener userInterface, Pile pile) {
         this.userInterface = userInterface;
         this.pile = pile;
         this.topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);

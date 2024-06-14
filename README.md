@@ -1,5 +1,7 @@
 # Gra Tetris
 
+**Autor** : Viktor Boichenko
+
 ## Wprowadzenie
 Projekt przedstawia implementację gry Tetris przy użyciu języka Java oraz biblioteki Swing do interfejsu użytkownika. Gra posiada podstawowe funkcje takie jak poruszanie się klocków, obracanie oraz możliwość upadku i zapełniania linii.
 
