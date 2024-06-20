@@ -21,6 +21,7 @@ Swing Tetris is a simple implementation of the classic Tetris game using Java an
 - **Up Arrow:** Rotate block
 - **Down Arrow:** Speed up block's fall
 - **R:** Restart the game
+- **Space** pause/resume the game
 
 ## Requirements
 - Java Runtime Environment (JRE) version 8 or newer
