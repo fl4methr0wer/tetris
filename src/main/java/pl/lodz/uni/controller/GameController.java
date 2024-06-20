@@ -13,38 +13,36 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GameEngine {
+public class GameController {
 
     private Timer timer = new Timer(500, this::onTimerTick);;
     private final GameStateListener userInterface;
     private GameOverListener gameOverListener;
     private Tetromino tetromino = TetrominoFactory.createRandomTetromino();
     private final Pile pile;
-    private Cell topLeftTetrominoCell;
+    private Cell topLeftTetrominoCell = new Cell(0,0);
     public GameState gameState = GameState.STOPPED;
 
-    public GameEngine(GameStateListener userInterface, Pile pile) {
+    public GameController(GameStateListener userInterface, Pile pile) {
         this.userInterface = userInterface;
         this.pile = pile;
-        this.topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
+        newGame();
         notifyCellsChanged();
     }
 
-    public void start() {
-        this.timer.start();
-        gameState = GameState.RUNNING;
-    }
-
-    public void stop() {
-        timer.stop();
-        gameState = GameState.STOPPED;
-    }
-
-    public void restart() {
-        this.pile.getCells().clear();
+    public void newGame() {
+        this.gameState = GameState.RUNNING;
         this.tetromino = TetrominoFactory.createRandomTetromino();
-        topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
-        gameState = GameState.RUNNING;
+        this.pile.getCells().clear();
+        this.topLeftTetrominoCell = new Cell(0, pile.getColMaxIndex() / 2);
+        this.timer.start();
+    }
+
+    public void toggleTimer() {
+        if (this.timer.isRunning())
+            timer.stop();
+        else
+            timer.restart();
     }
 
     public void registerGameOverListener(GameOverListener gameOverListener) {
@@ -92,12 +90,14 @@ public class GameEngine {
 
             gameOverListener.onGameOver();
             this.pile.getCells().clear();
-            this.stop();
+            this.timer.stop();
         }
         notifyCellsChanged();
     }
 
     public void moveTetrominoDown() {
+        if (!this.gameState.equals(GameState.RUNNING))
+            return;
         Cell movedDown = topLeftTetrominoCell.movedDown();
         if (!isValidNewTetrominoPosition(tetromino, movedDown)) {
             onBottomReached();
@@ -108,6 +108,8 @@ public class GameEngine {
     }
 
     public void moveTetrominoRight() {
+        if (!this.gameState.equals(GameState.RUNNING))
+            return;
         Cell movedRight = topLeftTetrominoCell.movedRight();
         if (!isValidNewTetrominoPosition(tetromino, movedRight))
             return;
@@ -116,6 +118,8 @@ public class GameEngine {
     }
 
     public void moveTetrominoLeft() {
+        if (!this.gameState.equals(GameState.RUNNING))
+            return;
         Cell movedLeft = topLeftTetrominoCell.movedLeft();
         if (!isValidNewTetrominoPosition(tetromino, movedLeft))
             return;
@@ -124,6 +128,8 @@ public class GameEngine {
     }
 
     public void rotateTetromino() {
+        if (!this.gameState.equals(GameState.RUNNING))
+            return;
         Tetromino rotated = tetromino.rotatedLeft();
         if (!isValidNewTetrominoPosition(rotated, topLeftTetrominoCell))
             return;

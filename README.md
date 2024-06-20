@@ -1,53 +1,43 @@
-# Gra Tetris
+# Swing Tetris
 
-**Autor** : Viktor Boichenko
+## Example Screenshot
+<p align="center">
+  <img src="src/main/resources/screenshot.png" alt="Tetris Game Screenshot" width="600">
+</p>
 
-## Wprowadzenie
-Projekt przedstawia implementację gry Tetris przy użyciu języka Java oraz biblioteki Swing do interfejsu użytkownika. Gra posiada podstawowe funkcje takie jak poruszanie się klocków, obracanie oraz możliwość upadku i zapełniania linii.
+## About
+Swing Tetris is a simple implementation of the classic Tetris game using Java and the Swing library for the user interface. The game includes features such as automatic block falling, user-controlled block movements, line clearing, and a scoring system.
 
-## Wymagania
+## Features
+- Automatic block falling
+- Block movements and rotations
+- Line clearing and scoring
+- Game restart functionality
+- Game over detection
 
-### Wymagania funkcjonalne
+## Game Controls
+- **Left Arrow:** Move block left
+- **Right Arrow:** Move block right
+- **Up Arrow:** Rotate block
+- **Down Arrow:** Speed up block's fall
+- **R:** Restart the game
 
-1. **Rozpoczęcie gry:**
-    - Gra powinna się rozpocząć po uruchomieniu aplikacji.
-    - Na ekranie powinna pojawić się plansza gry z pustymi komórkami.
+## Requirements
+- Java Runtime Environment (JRE) version 8 or newer
 
-2. **Poruszanie klockami:**
-    - Klocki powinny spadać automatycznie co określony czas.
-    - Gracz powinien mieć możliwość poruszania klockami w lewo, prawo oraz ich obracania przy użyciu klawiatury:
-        - Strzałka w lewo: przesunięcie klocka w lewo.
-        - Strzałka w prawo: przesunięcie klocka w prawo.
-        - Strzałka w górę: obrót klocka.
-        - Strzałka w dół: przyspieszenie opadania klocka.
-        - R: restart gry
-
-3. **Zapełnianie linii:**
-    - Jeżeli pozioma linia na planszy zostanie całkowicie zapełniona klockami, powinna zostać usunięta, a gracz powinien otrzymać punkty.
-    - Usunięte linie powinny spowodować przesunięcie klocków powyżej w dół.
-
-4. **Koniec gry:**
-    - Gra powinna się zakończyć, gdy nowy klocek nie może pojawić się na planszy z powodu braku miejsca.
-    - Powinna pojawić się informacja o końcu gry oraz osiągnięty wynik.
-
-### Wymagania niefunkcjonalne
-
-1. **Wydajność:**
-    - Gra powinna działać płynnie, bez zauważalnych opóźnień czy przestojów.
-    - Czas reakcji na akcje gracza powinien być minimalny.
-
-2. **Przenośność:**
-    - Aplikacja powinna działać na wszystkich systemach operacyjnych, na których można uruchomić środowisko Java (JRE).
-
-3. **Użyteczność:**
-    - Interfejs użytkownika powinien być intuicyjny i łatwy w obsłudze.
-    - Elementy interfejsu powinny być dobrze widoczne i czytelne.
-
-## Instalacja i uruchomienie
-
-1. Skompiluj projekt przy użyciu preferowanego narzędzia do budowania projektów Java (np. Maven, Gradle).
-2. Uruchom aplikację przy użyciu polecenia `java -jar <Project_name>.jar`.
-
-## Wersja JRE
-
-- Aplikacja wymaga Java Runtime Environment (JRE) w wersji 8 lub nowszej.
+## Installation and Execution
+1. **Clone the repository:**
+    ```sh
+    git clone <repository_url>
+    cd <repository_directory>
+    ```
+2. **Compile the project:**
+     ```sh
+     mvn clean install
+     ```
+3. **Run the application:**
+    ```sh
+    java -jar target/<Project_name>.jar
+    ```
+## Class diagram
+![Class diagram](src/main/resources/tetris_with_dependencies.png)

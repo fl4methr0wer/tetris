@@ -1,6 +1,6 @@
 package pl.lodz.uni;
 
-import pl.lodz.uni.controller.GameEngine;
+import pl.lodz.uni.controller.GameController;
 import pl.lodz.uni.controller.KeyboardInputHandler;
 import pl.lodz.uni.model.Pile;
 import pl.lodz.uni.view.GameFrame;
@@ -21,12 +21,11 @@ public class Main {
             GridPanel gridPanel = new GridPanel(ROWS, COLS, CELL_SIZE);
             gameFrame.setGridPanel(gridPanel); // Pass the gridPanel instance here
 
-            GameEngine gameEngine = new GameEngine(gridPanel, new Pile(ROWS, COLS));
+            GameController gameController = new GameController(gridPanel, new Pile(ROWS, COLS));
 
-            gameEngine.registerGameOverListener(new GameOverPopup());
-            //gameEngine.registerGameOverListener(gridPanel);
+            gameController.registerGameOverListener(new GameOverPopup());
 
-            KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameEngine);
+            KeyboardInputHandler inputHandler = new KeyboardInputHandler(gameController);
             gridPanel.setFocusable(true);
             gridPanel.addKeyListener(inputHandler);
 
